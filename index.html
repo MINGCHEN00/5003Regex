@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>Regex for Dummies</title>
+		<script src='https://cdn.jsdelivr.net/npm/vue@2.6.0' type='text/javascript' charset='UTF-8'></script>
+		<script src='https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js' type='text/javascript' charset='UTF-8'></script>
+	</head>
+	
+	
+	
+	<body>
+		<h1 class='title'>Regex for Dummies</h1>
+		<div id='left-navigation' class='left'>
+			<div style='float: left; width: 100%;' v-bind:class='[title_view.section_1, title_clicked.section_1]' @click='click_section_1'>
+				<span v-html='correct.section_1'></span>
+				<span>  Section 1</span>
+			</div>
+			<div style='float: left; width: 100%;' v-bind:class='[title_view.section_2, title_clicked.section_2]' @click='click_section_2'>
+				<span v-html='correct.section_2'></span>
+				<span>  Section 2</span>
+			</div>
+			<div style='float: left; width: 100%;' v-bind:class='[title_view.section_3, title_clicked.section_3]' @click='click_section_3'>
+				<span v-html='correct.section_3'></span>
+				<span>  Section 3</span>
+			</div>
+			<div style='float: left; width: 100%;' v-bind:class='[title_view.section_4, title_clicked.section_4]' @click='click_section_4'>
+				<span v-html='correct.section_4'></span>
+				<span>  Section 4</span>
+			</div>
+			<div style='float: left; width: 100%;' v-bind:class='[title_view.section_5, title_clicked.section_5]' @click='click_section_5'>
+				<span v-html='correct.section_5'></span>
+				<span>  Section 5</span>
+			</div>
+			<div style='float: left; width: 100%;' v-bind:class='[title_view.section_6, title_clicked.section_6]' @click='click_section_6'>
+				<span v-html='correct.section_6'></span>
+				<span>  Section 6</span>
+			</div>
+			<div style='float: left; width: 100%;' v-bind:class='[title_view.section_7, title_clicked.section_7]' @click='click_section_7'>
+				<span v-html='correct.section_7'></span>
+				<span>  Section 7</span>
+			</div>
+			<div style='float: left; width: 100%;' v-bind:class='[title_view.section_8, title_clicked.section_8]' @click='click_section_8'>
+				<span v-html='correct.section_8'></span>
+				<span>  Section 8</span>
+			</div>
+			<div style='float: left; width: 100%;' v-bind:class='[title_view.section_9, title_clicked.section_9]' @click='click_section_9'>
+				<span v-html='correct.section_9'></span>
+				<span>  Section 9</span>
+			</div>
+			<div style='float: left; width: 100%;' v-bind:class='[title_view.section_10, title_clicked.section_10]' @click='click_section_10'>
+				<span v-html='correct.section_10'></span>
+				<span>  Section 10</span>
+			</div>
+		</div>
+
+		<div id='content-section-1' class='right' v-if='view'>
+			Right Sidebar
+			{{ content }} 1
+			<input v-model='section_1_input_1' placeholder='Enter'>
+			<div>The enter is {{section_1_output_1}}</div>
+			<button v-on: click='section_1_submit_1'>SUBMIT</button>
+		</div>
+		<div id='content-section-2' class='right' v-if='view'>
+			Right Sidebar
+			{{ content }} 2
+		</div>
+		<div id='content-section-3' class='right' v-if='view'>
+			Right Sidebar
+			{{ content }} 3
+		</div>
+		<div id='content-section-4' class='right' v-if='view'>
+			Right Sidebar
+			{{ content }} 4
+		</div>
+		<div id='content-section-5' class='right' v-if='view'>
+			Right Sidebar
+			{{ content }} 5
+		</div>
+		<div id='content-section-6' class='right' v-if='view'>
+			Right Sidebar
+			{{ content }} 6
+		</div>
+		<div id='content-section-7' class='right' v-if='view'>
+			Right Sidebar
+			{{ content }} 7
+		</div>
+		<div id='content-section-8' class='right' v-if='view'>
+			Right Sidebar
+			{{ content }} 8
+		</div>
+		<div id='content-section-9' class='right' v-if='view'>
+			Right Sidebar
+			{{ content }} 9
+		</div>
+		<div id='content-section-10' class='right' v-if='view'>
+			Right Sidebar
+			{{ content }} 10
+		</div>
+		<div class='bottom'>
+			<div id='back' class='bottom-left' v-if='show_back' @click='click_back'>
+				BACK
+			</div>
+			<div id='next' class='bottom-right' v-if='show_next' @click='click_next'>
+				NEXT
+			</div>
+		</div>
+		<script type='text/javascript'>
+			
+			var navigation = new Vue({
+				el: '#left-navigation',
+				data: {
+					page_index: 1,
+					title_view: {
+						section_1: 'navi_show',
+						section_2: 'navi_hidden',
+						section_3: 'navi_hidden',
+						section_4: 'navi_hidden',
+						section_5: 'navi_hidden',
+						section_6: 'navi_hidden',
+						section_7: 'navi_hidden',
+						section_8: 'navi_hidden',
+						section_9: 'navi_hidden',
+						section_10: 'navi_hidden',
+					},
+					title_clicked: {
+						section_1: 'navi_clicked',
+						section_2: 'navi_unclicked',
+						section_3: 'navi_unclicked',
+						section_4: 'navi_unclicked',
+						section_5: 'navi_unclicked',
+						section_6: 'navi_unclicked',
+						section_7: 'navi_unclicked',
+						section_8: 'navi_unclicked',
+						section_9: 'navi_unclicked',
+						section_10: 'navi_unclicked',
+					},
+					correct: {
+						section_1: '&#8680', // Not Answer
+						section_2: '&#10004', // Right
+						section_3: '&#10008', // Wrong
+						section_4: '&#8680',
+						section_5: '&#8680',
+						section_6: '&#8680',
+						section_7: '&#8680',
+						section_8: '&#8680',
+						section_9: '&#8680',
+						section_10: '&#8680',
+					},
+				},
+				methods: {
+					click_action: function(page_index){
+						navigation.$data.page_index = page_index
+						navigation.$data.title_view['section_' + page_index] = 'navi_show';
+						for(i in navigation.$data.title_view){
+							if(i != 'section_' + page_index){
+								navigation.$data.title_view[i] = 'navi_hidden';
+							}
+						}
+						navigation.$data.title_clicked['section_' + page_index] = 'navi_clicked';
+						
+						content_section_1.$data.view = false;
+						content_section_2.$data.view = false;
+						content_section_3.$data.view = false;
+						content_section_4.$data.view = false;
+						content_section_5.$data.view = false;
+						content_section_6.$data.view = false;
+						content_section_7.$data.view = false;
+						content_section_8.$data.view = false;
+						content_section_9.$data.view = false;
+						content_section_10.$data.view = false;
+						if(page_index == 1) content_section_1.$data.view = true;
+						else if(page_index == 2) content_section_2.$data.view = true;
+						else if(page_index == 3) content_section_3.$data.view = true;
+						else if(page_index == 4) content_section_4.$data.view = true;
+						else if(page_index == 5) content_section_5.$data.view = true;
+						else if(page_index == 6) content_section_6.$data.view = true;
+						else if(page_index == 7) content_section_7.$data.view = true;
+						else if(page_index == 8) content_section_8.$data.view = true;
+						else if(page_index == 9) content_section_9.$data.view = true;
+						else if(page_index == 10) content_section_10.$data.view = true;
+						
+						back.$data.show_back = (navigation.$data.title_view.section_1 != 'navi_show')
+						next.$data.show_next = (navigation.$data.title_view.section_10 != 'navi_show')
+					},
+					click_section_1: function() {
+						navigation.$options.methods.click_action(1);
+					},
+					click_section_2: function() {
+						navigation.$options.methods.click_action(2);
+					},
+					click_section_3: function() {
+						navigation.$options.methods.click_action(3);
+					},
+					click_section_4: function() {
+						navigation.$options.methods.click_action(4);
+					},
+					click_section_5: function() {
+						navigation.$options.methods.click_action(5);
+					},
+					click_section_6: function() {
+						navigation.$options.methods.click_action(6);
+					},
+					click_section_7: function() {
+						navigation.$options.methods.click_action(7);
+					},
+					click_section_8: function() {
+						navigation.$options.methods.click_action(8);
+					},
+					click_section_9: function() {
+						navigation.$options.methods.click_action(9);
+					},
+					click_section_10: function() {
+						navigation.$options.methods.click_action(10);
+					},
+				}
+			})
+			
+			var content_section_1 = new Vue({
+				el: '#content-section-1',
+				data: {
+					view: true,
+					content: 'Hello Section',
+					section_1_input_1: '',
+					section_1_output_1: ','
+				},
+				methods: {
+					section_1_submit_1: function(){
+						var input_1 = content_section_1.$data.section_1_input_1;
+						var output_1 = ''
+					
+						const gatewayUrl = '';
+						fetch(gatewayUrl, {
+							method: 'POST',
+							headers:{
+								'Accept': 'application/json',
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({'content': input_1})
+						}).then(response => {
+							// console.log(response.json().toString());
+							return response.json();
+						}).then(data => {
+							content_section_1.$data.section_1_output_1 = data.toString();
+							console.log(content_section_1.$data.section_1_output_1);
+						})
+						
+						/*
+						this.$http.post('', {'content': input_1}, {emulateJSON: true})
+						    .then(response => {
+                                console.log(response);
+                            }, response => {
+                                console.log(response);
+                        });
+							
+						content_section_1.$data.section_1_output_1 = output_1;
+						*/
+					}
+				},
+				beforeCreate:function(){},
+			})
+			
+			var content_section_2 = new Vue({
+				el: '#content-section-2',
+				data: {
+					view: false,
+					content: 'Hello Section'
+				},
+			})
+			
+			var content_section_3 = new Vue({
+				el: '#content-section-3',
+				data: {
+					view: false,
+					content: 'Hello Section'
+				},
+			})
+			
+			var content_section_4 = new Vue({
+				el: '#content-section-4',
+				data: {
+					view: false,
+					content: 'Hello Section'
+				},
+			})
+			
+			var content_section_5 = new Vue({
+				el: '#content-section-5',
+				data: {
+					view: false,
+					content: 'Hello Section'
+				},
+			})
+			
+			var content_section_6 = new Vue({
+				el: '#content-section-6',
+				data: {
+					view: false,
+					content: 'Hello Section'
+				},
+			})
+			
+			var content_section_7 = new Vue({
+				el: '#content-section-7',
+				data: {
+					view: false,
+					content: 'Hello Section'
+				},
+			})
+			
+			var content_section_8 = new Vue({
+				el: '#content-section-8',
+				data: {
+					view: false,
+					content: 'Hello Section'
+				},
+			})
+			
+			var content_section_9 = new Vue({
+				el: '#content-section-9',
+				data: {
+					view: false,
+					content: 'Hello Section'
+				},
+			})
+			
+			var content_section_10 = new Vue({
+				el: '#content-section-10',
+				data: {
+					view: false,
+					content: 'Hello Section'
+				},
+			})
+			
+			var back = new Vue({
+				el: '#back',
+				data: {
+					show_back: navigation.$data.title_view.section_1 != 'navi_show'
+				},
+				methods: {
+					click_back: function(){
+						page_index = navigation.$data.page_index - 1;
+						navigation.$options.methods.click_action(page_index);
+					}
+				}
+			})
+			
+			var next = new Vue({
+				el: '#next',
+				data: {
+					show_next: navigation.$data.title_view.section_10 != 'navi_show'
+				},
+				methods: {
+					click_next: function(){
+						page_index = navigation.$data.page_index + 1;
+						navigation.$options.methods.click_action(page_index);
+						
+					}
+				}
+			})
+			
+setTimeout(function(){
+	
+}, 3000)
+//vm.$data.a = ...
+/*
+main_content.$watch('navigation_status', function(newVal, oldVal){
+	for i in newVal{
+		if newVal[i] != oldVal[i]{
+			
+		}
+	}
+})
+// <button v-on: click='func_name'> </button>
+*/
+// <p v-html='data_variable_name'></p>
+		</script>
+		<style type='text/css'>
+			.title {text-align: center; color: blue; font-size: 50px;}
+			
+			.left {float: left; width: 17%; height: 250px; background-color: grey; border:3px solid black}
+			.right {float: right; width: 80%; background-color: white; border:3px solid black}
+			
+			.navi_show {text-decoration:underline; font-size: 20px; font-weight:bold}
+			.navi_hidden { font-size: 17px;}
+			.navi_clicked {color: blue;}
+			.navi_unclicked {color: red;}
+			
+			.bottom {float: left; width: 100%;}
+			.bottom-left {float: left; width: 50%; vertical-align: bottom; text-decoration:underline;}
+			.bottom-right {float: right; width: 50%; text-align: right; vertical-align: bottom; text-decoration:underline;}
+		</style>
+	</body>
+</html>
